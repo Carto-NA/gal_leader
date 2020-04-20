@@ -42,3 +42,23 @@ COMMENT ON COLUMN met_zon.m_zon_compo_gal_leader_na.cog_annee IS 'Année COG de 
 COMMENT ON COLUMN met_zon.m_zon_compo_gal_leader_na.commentaires IS 'Commentaires';
 COMMENT ON COLUMN met_zon.m_zon_compo_gal_leader_na.date_import IS 'Date d''import de la donnée';
 COMMENT ON COLUMN met_zon.m_zon_compo_gal_leader_na.date_maj IS 'Date de mise à jour de la donnée';
+
+
+-- Ajout de données
+INSERT INTO met_zon.m_zon_compo_gal_leader_na (
+	numcom, nomcom, siren, numdep, 
+	code_gal_leader, nom_gal_leader, 
+	cog_annee,
+	date_import
+)
+SELECT 
+	numcom, nomcom, siren, coddep_com,
+	cod_leader_1420initial, nom_leader_gal_1420initial,
+	CASE WHEN a=1 THEN 'un'
+            WHEN a=2 THEN 'deux'
+            ELSE 'autres'
+       END
+	cog, 
+	--cod_leader_1420_maj, nom_leader_gal_1420_maj,
+	'21/04/2020'
+FROM z_maj."20200420_compo_gal_leader_com19";
