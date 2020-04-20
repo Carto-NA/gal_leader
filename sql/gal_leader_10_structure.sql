@@ -7,10 +7,10 @@
 
 
 ------------------------------------------------------------------------
--- Table: met_zon.m_zon_gal_compo_leader_na
+-- Table: met_zon.m_zon_compo_gal_leader_na
 
--- DROP TABLE met_zon.m_zon_gal_compo_leader_na;
-CREATE TABLE met_zon.m_zon_gal_compo_leader_na
+-- DROP TABLE met_zon.m_zon_compo_gal_leader_na;
+CREATE TABLE met_zon.m_zon_compo_gal_leader_na
 (
 	id serial NOT NULL,
 	numcom character varying(5),
@@ -23,22 +23,22 @@ CREATE TABLE met_zon.m_zon_gal_compo_leader_na
 	commentaires text,
 	date_import date,
 	date_maj date,
-    CONSTRAINT m_zon_gal_compo_leader_na_pkey PRIMARY KEY (id),
-    CONSTRAINT m_zon_gal_compo_leader_na_uniq UNIQUE (numcom)
+    CONSTRAINT m_zon_compo_gal_leader_na_pkey PRIMARY KEY (id),
+    CONSTRAINT m_zon_compo_gal_leader_na_uniq UNIQUE (numcom)
 );
 
 --
-COMMENT ON TABLE met_zon.m_zon_gal_compo_leader_na IS 'Table d''appartenance des communes au GAL LEADER en Nouvelle-Aquitaine';
+COMMENT ON TABLE met_zon.m_zon_compo_gal_leader_na IS 'Table d''appartenance des communes au GAL LEADER en Nouvelle-Aquitaine';
 
 --
-COMMENT ON COLUMN met_zon.m_zon_gal_compo_leader_na.id IS 'Identifiant';
-COMMENT ON COLUMN met_zon.m_zon_gal_compo_leader_na.numcom IS 'Code INSEE de la commune';
-COMMENT ON COLUMN met_zon.m_zon_gal_compo_leader_na.nomcom IS 'Nom de la commune';
-COMMENT ON COLUMN met_zon.m_zon_gal_compo_leader_na.siren IS 'Numéro SIREN de la commune';
-COMMENT ON COLUMN met_zon.m_zon_gal_compo_leader_na.numdep IS 'Numéro département du projet';
-COMMENT ON COLUMN met_zon.m_zon_gal_compo_leader_na.code_gal_leader IS 'Code du Groupe d''Action Locale';
-COMMENT ON COLUMN met_zon.m_zon_gal_compo_leader_na.nom_gal_leader IS 'Nom du Groupe d''Action Locale LEADER';
-COMMENT ON COLUMN met_zon.m_zon_gal_compo_leader_na.cog_annee IS 'Année COG de référence';
-COMMENT ON COLUMN met_zon.m_zon_gal_compo_leader_na.commentaires IS 'Commentaires';
-COMMENT ON COLUMN met_zon.m_zon_gal_compo_leader_na.date_import IS 'Date d''import de la donnée';
-COMMENT ON COLUMN met_zon.m_zon_gal_compo_leader_na.date_maj IS 'Date de mise à jour de la donnée';
+COMMENT ON COLUMN met_zon.m_zon_compo_gal_leader_na.id IS 'Identifiant';
+COMMENT ON COLUMN met_zon.m_zon_compo_gal_leader_na.numcom IS 'Code INSEE de la commune';
+COMMENT ON COLUMN met_zon.m_zon_compo_gal_leader_na.nomcom IS 'Nom de la commune';
+COMMENT ON COLUMN met_zon.m_zon_compo_gal_leader_na.siren IS 'Numéro SIREN de la commune';
+COMMENT ON COLUMN met_zon.m_zon_compo_gal_leader_na.numdep IS 'Numéro département du projet';
+COMMENT ON COLUMN met_zon.m_zon_compo_gal_leader_na.code_gal_leader IS 'Code du Groupe d''Action Locale';
+COMMENT ON COLUMN met_zon.m_zon_compo_gal_leader_na.nom_gal_leader IS 'Nom du Groupe d''Action Locale LEADER';
+COMMENT ON COLUMN met_zon.m_zon_compo_gal_leader_na.cog_annee IS 'Année COG de référence';
+COMMENT ON COLUMN met_zon.m_zon_compo_gal_leader_na.commentaires IS 'Commentaires';
+COMMENT ON COLUMN met_zon.m_zon_compo_gal_leader_na.date_import IS 'Date d''import de la donnée';
+COMMENT ON COLUMN met_zon.m_zon_compo_gal_leader_na.date_maj IS 'Date de mise à jour de la donnée';
