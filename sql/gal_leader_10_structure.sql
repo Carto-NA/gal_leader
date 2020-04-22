@@ -7,6 +7,41 @@
 
 
 ------------------------------------------------------------------------
+-- Table: met_zon.m_zon_lt_gal_leader
+
+-- DROP TABLE met_zon.m_zon_lt_gal_leader;
+CREATE TABLE met_zon.m_zon_lt_gal_leader
+(
+  id serial,
+  code_region character varying(80) NOT NULL,
+  code_gal character varying(3),
+  code_asp character varying(6),
+  code_enrd character varying(6),
+  nom_gal_leader character varying(255),
+  nom_gal_leader_2 character varying(255), 
+  commentaires text,
+  date_import date,
+  date_maj date,
+  CONSTRAINT m_zon_lt_gal_leader_pkey PRIMARY KEY (id),
+  CONSTRAINT m_zon_lt_gal_leader_uniq UNIQUE (code_region)
+);
+
+--
+COMMENT ON TABLE met_zon.m_zon_lt_gal_leader  IS 'Liste des territoires Groupe d''Action Locale LEADER';
+--  
+COMMENT ON COLUMN met_zon.m_zon_lt_gal_leader.id IS 'Identifiant';
+COMMENT ON COLUMN met_zon.m_zon_lt_gal_leader.code_region IS 'Code région du Groupe d''Action Locale';
+COMMENT ON COLUMN met_zon.m_zon_lt_gal_leader.code_gal IS 'Code du Groupe d''Action Locale';
+COMMENT ON COLUMN met_zon.m_zon_lt_gal_leader.code_asp IS 'Code ASP du Groupe d''Action Locale';
+COMMENT ON COLUMN met_zon.m_zon_lt_gal_leader.code_enrd IS 'Code ENRD (The European Network for Rural Development) du Groupe d''Action Locale';
+COMMENT ON COLUMN met_zon.m_zon_lt_gal_leader.nom_gal_leader IS 'Nom du Groupe d''Action Locale LEADER';
+COMMENT ON COLUMN met_zon.m_zon_lt_gal_leader.nom_gal_leader_2 IS 'Nom court du Groupe d''Action Locale LEADER';
+COMMENT ON COLUMN met_zon.m_zon_lt_gal_leader.commentaires IS 'Commentaires';
+COMMENT ON COLUMN met_zon.m_zon_lt_gal_leader.date_import IS 'Date d''import de la donnée';
+COMMENT ON COLUMN met_zon.m_zon_lt_gal_leader.date_maj IS 'Date de mise à jour de la donnée';
+
+
+------------------------------------------------------------------------
 -- Table: ref_zonage.t_appartenance_geo_com_gal_leader
 
 -- DROP TABLE ref_zonage.t_appartenance_geo_com_gal_leader;
@@ -20,14 +55,16 @@ CREATE TABLE ref_zonage.t_appartenance_geo_com_gal_leader (
 	numreg varchar(2),
 	nomreg varchar(35),
 	numepci varchar(9),
-	numgal_leader character varying(5),	
-	nomgal_leader character varying(255),
+	code_region  character varying(80),
+	nom_gal_leader character varying(255),
+	nom_gal_leader_2 character varying(255), 
 	cog_annee character varying(4),
 	commentaires text,
 	date_import date,
 	date_maj date,
 	CONSTRAINT t_appartenance_geo_com_gal_leader_pkey PRIMARY KEY (id),
-	CONSTRAINT t_appartenance_geo_com_gal_leader_uniq UNIQUE (numcom)
+	CONSTRAINT t_appartenance_geo_com_gal_leader_uniq UNIQUE (numcom),
+	CONSTRAINT t_appartenance_geo_com_gal_leader_code_region_fkey FOREIGN KEY (code_region) REFERENCES met_zon.m_zon_lt_gal_leader(code_region)
 );
 
 --
@@ -42,8 +79,9 @@ COMMENT ON COLUMN ref_zonage.t_appartenance_geo_com_gal_leader.nomdep IS 'Nom du
 COMMENT ON COLUMN ref_zonage.t_appartenance_geo_com_gal_leader.numreg IS 'Numéro de la région';
 COMMENT ON COLUMN ref_zonage.t_appartenance_geo_com_gal_leader.nomreg IS 'Nom de la régon';
 COMMENT ON COLUMN ref_zonage.t_appartenance_geo_com_gal_leader.numepci IS 'Numéro de l''EPCI';
-COMMENT ON COLUMN ref_zonage.t_appartenance_geo_com_gal_leader.numgal_leader IS 'Code du Groupe d''Action Locale';
-COMMENT ON COLUMN ref_zonage.t_appartenance_geo_com_gal_leader.nomgal_leader IS 'Nom du Groupe d''Action Locale LEADER';
+COMMENT ON COLUMN ref_zonage.t_appartenance_geo_com_gal_leader.code_region IS 'Code du Groupe d''Action Locale';
+COMMENT ON COLUMN ref_zonage.t_appartenance_geo_com_gal_leader.nom_gal_leader IS 'Nom du Groupe d''Action Locale LEADER';
+COMMENT ON COLUMN ref_zonage.t_appartenance_geo_com_gal_leader.nom_gal_leader_2 IS 'Nom court du Groupe d''Action Locale LEADER';
 COMMENT ON COLUMN ref_zonage.t_appartenance_geo_com_gal_leader.cog_annee IS 'Année COG de référence';
 COMMENT ON COLUMN ref_zonage.t_appartenance_geo_com_gal_leader.commentaires IS 'Commentaires';
 COMMENT ON COLUMN ref_zonage.t_appartenance_geo_com_gal_leader.date_import IS 'Date d''import de la donnée';
