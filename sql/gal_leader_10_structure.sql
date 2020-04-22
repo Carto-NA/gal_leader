@@ -88,7 +88,7 @@ COMMENT ON COLUMN ref_zonage.t_appartenance_geo_com_gal_leader.date_import IS 'D
 COMMENT ON COLUMN ref_zonage.t_appartenance_geo_com_gal_leader.date_maj IS 'Date de mise à jour de la donnée';
 
 
---
+-- On importe la liste des communes
 INSERT INTO ref_zonage.t_appartenance_geo_com_gal_leader (
 	numcom, nomcom, nomcom_m, numdep, nomdep, numreg, nomreg, numepci, cog_annee
 )
@@ -97,79 +97,32 @@ SELECT
 	insee_reg, nom_reg, code_epci, '2019' FROM ref_adminexpress.r_admexp_commune_fr
 where insee_reg='75';
 
+-- On met à jour l'appartenance des communes aux GALs
+UPDATE ref_zonage.t_appartenance_geo_com_gal_leader t1
+SET 
+	code_region = t2.cod_leader_1420_maj2,
+	nom_gal_leader=t2.nom_leader_gal_1420_maj,
+	cog_annee='2019',
+	date_import='22/04/2020'
+FROM z_maj."20200420_gal_leader_com19" t2
+WHERE t1.numcom=cast(t2.numcom as text);
+
+
+
 ------------------------------------------------------------------------
--- GAL Angoumois ( communes) ==> A faire CA Angouleme
+------------------------------------------------------------------------
+-- Mise à jour de l'appartenance des communes aux GALs à partir des EPCI
+
+------------------------------------------------------------------------
+-- GAL Angoumois ( communes) ==> A refaire
 
 -- EPCI : CC de La Rochefoucauld Porte du Périgord
-UPDATE ref_zonage.t_appartenance_geo_com_gal_leader 
-SET numgal_leader='16Leader01',	nomgal_leader='Angoumois' 
+UPDATE ref_zonage.t_appartenance_geo_com_gal_leader SET numgal_leader='16Leader01',	nomgal_leader='Angoumois' 
 WHERE numepci IN ('200068914');
 
 -- EPCI : une partie de la CA du Grand Angoulême
-UPDATE ref_zonage.t_appartenance_geo_com_gal_leader 
-SET numgal_leader='16Leader01',	nomgal_leader='Angoumois' 
+UPDATE ref_zonage.t_appartenance_geo_com_gal_leader SET numgal_leader='16Leader01',	nomgal_leader='Angoumois' 
 WHERE numepci IN ('200068914');
-
-
-------------------------------------------------------------------------
--- GAL Aunis (44 communes) ==> Ok
-
--- EPCI : CC d’Aunis Sud
-UPDATE ref_zonage.t_appartenance_geo_com_gal_leader 
-SET numgal_leader='17Leader01',	nomgal_leader='Aunis' 
-WHERE numepci IN ('200041614');
-
--- EPCI : CC d’Aunis Atlantique
-UPDATE ref_zonage.t_appartenance_geo_com_gal_leader 
-SET numgal_leader='17Leader01',	nomgal_leader='Angoumois' 
-WHERE numepci IN ('200041499');
-
-
-------------------------------------------------------------------------
--- GAL Charente-Limousine (58 communes) ==> Ok
-
--- EPCI : CC Charente Limousine
-UPDATE ref_zonage.t_appartenance_geo_com_gal_leader 
-SET numgal_leader='16Leader02',	nomgal_leader='Charente-Limousine' 
-WHERE numepci IN ('200072049');
-
-
-------------------------------------------------------------------------
--- GAL Civraisien (36 communes) ==> Ok
-
--- EPCI : CC du Civraisien-en-Poitou
-UPDATE ref_zonage.t_appartenance_geo_com_gal_leader 
-SET numgal_leader='86Leader02',	nomgal_leader='Civraisien' 
-WHERE numepci IN ('200070035');
-
-
-------------------------------------------------------------------------
--- GAL Haute-Saintonge (129 communes) ==> Ok
-
--- EPCI : CC de la Haute Saintonge
-UPDATE ref_zonage.t_appartenance_geo_com_gal_leader 
-SET numgal_leader='17Leader02',	nomgal_leader='Haute-Saintonge' 
-WHERE numepci IN ('200041523');
-
-
-------------------------------------------------------------------------
--- GAL Mellois (62 communes) ==> Ok
-
--- EPCI : CC du Cellois, Coeur du Poitou, Mellois et Val
-de Boutonne
-UPDATE ref_zonage.t_appartenance_geo_com_gal_leader 
-SET numgal_leader='79Leader02',	nomgal_leader='Mellois' 
-WHERE numepci IN ('200069755');
-
-
-------------------------------------------------------------------------
--- GAL Nord Deux-Sèvres (57 communes) ==> Ok
-
--- EPCI : Communauté d’Agglomération du Bocage
-Bressuirais et Communauté de communes du Thouarsais
-UPDATE ref_zonage.t_appartenance_geo_com_gal_leader 
-SET numgal_leader='79Leader03',	nomgal_leader='Nord Deux-Sèvres' 
-WHERE numepci IN ('200040244', '247900798');
 
 
 ------------------------------------------------------------------------
@@ -183,11 +136,55 @@ WHERE numepci IN ('', '', '');
 
 
 ------------------------------------------------------------------------
+-- GAL Aunis (44 communes) ==> Ok
+
+-- EPCI : CC d’Aunis Sud
+-- EPCI : CC d’Aunis Atlantique
+UPDATE ref_zonage.t_appartenance_geo_com_gal_leader SET numgal_leader='17Leader01',	nomgal_leader='Aunis' 
+WHERE numepci IN ('200041614', '200041499');
+
+------------------------------------------------------------------------
+-- GAL Charente-Limousine (58 communes) ==> Ok
+
+-- EPCI : CC Charente Limousine
+UPDATE ref_zonage.t_appartenance_geo_com_gal_leader SET numgal_leader='16Leader02',	nomgal_leader='Charente-Limousine' 
+WHERE numepci IN ('200072049');
+
+------------------------------------------------------------------------
+-- GAL Civraisien (36 communes) ==> Ok
+
+-- EPCI : CC du Civraisien-en-Poitou
+UPDATE ref_zonage.t_appartenance_geo_com_gal_leader SET numgal_leader='86Leader02',	nomgal_leader='Civraisien' 
+WHERE numepci IN ('200070035');
+
+------------------------------------------------------------------------
+-- GAL Haute-Saintonge (129 communes) ==> Ok
+
+-- EPCI : CC de la Haute Saintonge
+UPDATE ref_zonage.t_appartenance_geo_com_gal_leader SET numgal_leader='17Leader02',	nomgal_leader='Haute-Saintonge' 
+WHERE numepci IN ('200041523');
+
+------------------------------------------------------------------------
+-- GAL Mellois (62 communes) ==> Ok
+
+-- EPCI : CC du Cellois, Coeur du Poitou, Mellois et Val de Boutonne
+UPDATE ref_zonage.t_appartenance_geo_com_gal_leader SET numgal_leader='79Leader02',	nomgal_leader='Mellois' 
+WHERE numepci IN ('200069755');
+
+------------------------------------------------------------------------
+-- GAL Nord Deux-Sèvres (57 communes) ==> Ok
+
+-- EPCI : Communauté d’Agglomération du Bocage Bressuirais 
+-- EPCI : Communauté de communes du Thouarsais
+UPDATE ref_zonage.t_appartenance_geo_com_gal_leader SET numgal_leader='79Leader03',	nomgal_leader='Nord Deux-Sèvres' 
+WHERE numepci IN ('200040244', '247900798');
+
+------------------------------------------------------------------------
 -- GAL Ouest Charente Pays du Cognac (57 communes) ==> Ok
 
--- EPCI : CC du Rouillacais + Grand Cognac Communauté d’agglomération
-UPDATE ref_zonage.t_appartenance_geo_com_gal_leader 
-SET numgal_leader='17Leader02',	nomgal_leader='Aunis' 
+-- EPCI : CC du Rouillacais
+-- EPCI : Grand Cognac Communauté d’agglomération
+UPDATE ref_zonage.t_appartenance_geo_com_gal_leader SET numgal_leader='17Leader02',	nomgal_leader='Aunis' 
 WHERE numepci IN ('241600303', '200070514');
 
 
