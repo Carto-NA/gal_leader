@@ -108,6 +108,60 @@ FROM z_maj."20200420_gal_leader_com19" t2
 WHERE t1.numcom=cast(t2.numcom as text);
 
 
+------------------------------------------------------------------------
+-- Table: met_zon.m_zon_gal_leader_na_geo
+
+-- DROP TABLE met_zon.m_zon_gal_leader_na_geo;
+CREATE TABLE met_zon.m_zon_gal_leader_na_geo (
+	id serial NOT NULL,
+	code_region varchar(20) NOT NULL,
+	code_gal varchar(3) NULL,
+	code_asp varchar(6) NULL,
+	code_enrd varchar(6) NULL,
+	nom_gal_leader varchar(255) NULL,
+	nom_gal_leader_2 varchar(255) NULL,
+	commentaires text NULL,
+	date_import date NULL,
+	date_maj date NULL,
+	geom geometry(MULTIPOLYGON, 2154) NULL,
+	CONSTRAINT m_zon_gal_leader_na_geo_pkey PRIMARY KEY (id),
+	CONSTRAINT m_zon_gal_leader_na_geo_uniq UNIQUE (code_region)
+);
+
+--
+COMMENT ON TABLE met_zon.m_zon_gal_leader_na_geo  IS 'Zonage des Groupes d''Action Locale LEADER';
+--  
+COMMENT ON COLUMN met_zon.m_zon_gal_leader_na_geo.id IS 'Identifiant';
+COMMENT ON COLUMN met_zon.m_zon_gal_leader_na_geo.code_region IS 'Code région du Groupe d''Action Locale';
+COMMENT ON COLUMN met_zon.m_zon_gal_leader_na_geo.code_gal IS 'Code du Groupe d''Action Locale';
+COMMENT ON COLUMN met_zon.m_zon_gal_leader_na_geo.code_asp IS 'Code ASP du Groupe d''Action Locale';
+COMMENT ON COLUMN met_zon.m_zon_gal_leader_na_geo.code_enrd IS 'Code ENRD (The European Network for Rural Development) du Groupe d''Action Locale';
+COMMENT ON COLUMN met_zon.m_zon_gal_leader_na_geo.nom_gal_leader IS 'Nom du Groupe d''Action Locale LEADER';
+COMMENT ON COLUMN met_zon.m_zon_gal_leader_na_geo.nom_gal_leader_2 IS 'Nom court du Groupe d''Action Locale LEADER';
+COMMENT ON COLUMN met_zon.m_zon_gal_leader_na_geo.commentaires IS 'Commentaires';
+COMMENT ON COLUMN met_zon.m_zon_gal_leader_na_geo.date_import IS 'Date d''import de la donnée';
+COMMENT ON COLUMN met_zon.m_zon_gal_leader_na_geo.date_maj IS 'Date de mise à jour de la donnée';
+COMMENT ON COLUMN met_zon.m_zon_gal_leader_na_geo.geom IS 'Géometrie';
+
+
+-- Insertion de la données géographique des GALs LEADER
+INSERT INTO met_zon.m_zon_gal_leader_na_geo (
+	code_region, code_gal, code_asp, code_enrd, nom_gal_leader,
+	date_maj, geom
+)
+SELECT r1.code_region, r1.code_gal, r1.code_asp, r1.code_enrd, r1.nom_gal_leader, now(), ST_Multi(ST_Union(r2.geom)) AS geom
+FROM (
+	SELECT t1.numcom, t1.code_region, t1.nom_gal_leader, t2.code_gal, t2.code_asp, t2.code_enrd
+	FROM ref_zonage.t_appartenance_geo_com_gal_leader t1
+	INNER JOIN met_zon.m_zon_lt_gal_leader t2
+	ON t1.code_region = t2.code_region) r1
+INNER JOIN ref_adminexpress.r_admexp_commune_fr r2
+ON r1.numcom = r2.insee_com
+GROUP BY r1.code_region, r1.nom_gal_leader, r1.code_gal, r1.code_asp, r1.code_enrd, now();
+
+
+
+
 
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
