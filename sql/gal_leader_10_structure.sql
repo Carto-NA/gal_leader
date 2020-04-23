@@ -19,7 +19,9 @@ CREATE TABLE met_zon.m_zon_lt_gal_leader
   code_enrd character varying(6),
   nom_gal_leader character varying(255),
   nom_gal_leader_2 character varying(255), 
+  structure_porteuse character varying(255), 
   commentaires text,
+  color character varying(7),
   date_import date,
   date_maj date,
   CONSTRAINT m_zon_lt_gal_leader_pkey PRIMARY KEY (id),
@@ -36,7 +38,9 @@ COMMENT ON COLUMN met_zon.m_zon_lt_gal_leader.code_asp IS 'Code ASP du Groupe d'
 COMMENT ON COLUMN met_zon.m_zon_lt_gal_leader.code_enrd IS 'Code ENRD (The European Network for Rural Development) du Groupe d''Action Locale';
 COMMENT ON COLUMN met_zon.m_zon_lt_gal_leader.nom_gal_leader IS 'Nom du Groupe d''Action Locale LEADER';
 COMMENT ON COLUMN met_zon.m_zon_lt_gal_leader.nom_gal_leader_2 IS 'Nom court du Groupe d''Action Locale LEADER';
+COMMENT ON COLUMN met_zon.m_zon_lt_gal_leader.structure_porteuse IS 'Strucuture porteuse du GAL LEADER';
 COMMENT ON COLUMN met_zon.m_zon_lt_gal_leader.commentaires IS 'Commentaires';
+COMMENT ON COLUMN met_zon.m_zon_lt_gal_leader.color IS 'Couleur du fond';
 COMMENT ON COLUMN met_zon.m_zon_lt_gal_leader.date_import IS 'Date d''import de la donnée';
 COMMENT ON COLUMN met_zon.m_zon_lt_gal_leader.date_maj IS 'Date de mise à jour de la donnée';
 
