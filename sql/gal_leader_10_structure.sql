@@ -124,7 +124,9 @@ CREATE TABLE met_zon.m_zon_gal_leader_na_geo (
 	code_enrd varchar(6) NULL,
 	nom_gal_leader varchar(255) NULL,
 	nom_gal_leader_2 varchar(255) NULL,
+	structure_porteuse character varying(255),
 	commentaires text NULL,
+	color character varying(7),
 	date_import date NULL,
 	date_maj date NULL,
 	geom geometry(MULTIPOLYGON, 2154) NULL,
@@ -142,7 +144,9 @@ COMMENT ON COLUMN met_zon.m_zon_gal_leader_na_geo.code_asp IS 'Code ASP du Group
 COMMENT ON COLUMN met_zon.m_zon_gal_leader_na_geo.code_enrd IS 'Code ENRD (The European Network for Rural Development) du Groupe d''Action Locale';
 COMMENT ON COLUMN met_zon.m_zon_gal_leader_na_geo.nom_gal_leader IS 'Nom du Groupe d''Action Locale LEADER';
 COMMENT ON COLUMN met_zon.m_zon_gal_leader_na_geo.nom_gal_leader_2 IS 'Nom court du Groupe d''Action Locale LEADER';
+COMMENT ON COLUMN met_zon.m_zon_gal_leader_na_geo.structure_porteuse IS 'Structure porteuse du GAL LEADER';
 COMMENT ON COLUMN met_zon.m_zon_gal_leader_na_geo.commentaires IS 'Commentaires';
+COMMENT ON COLUMN met_zon.m_zon_gal_leader_na_geo.color IS 'Couleur du fond';
 COMMENT ON COLUMN met_zon.m_zon_gal_leader_na_geo.date_import IS 'Date d''import de la donnée';
 COMMENT ON COLUMN met_zon.m_zon_gal_leader_na_geo.date_maj IS 'Date de mise à jour de la donnée';
 COMMENT ON COLUMN met_zon.m_zon_gal_leader_na_geo.geom IS 'Géometrie';
@@ -150,18 +154,19 @@ COMMENT ON COLUMN met_zon.m_zon_gal_leader_na_geo.geom IS 'Géometrie';
 
 -- Insertion de la données géographique des GALs LEADER
 INSERT INTO met_zon.m_zon_gal_leader_na_geo (
-	code_region, code_gal, code_asp, code_enrd, nom_gal_leader,
+	code_region, code_gal, code_asp, code_enrd, nom_gal_leader, structure_porteuse, color
 	date_maj, geom
 )
-SELECT r1.code_region, r1.code_gal, r1.code_asp, r1.code_enrd, r1.nom_gal_leader, now(), ST_Multi(ST_Union(r2.geom)) AS geom
+SELECT r1.code_region, r1.code_gal, r1.code_asp, r1.code_enrd, r1.nom_gal_leader, r1.structure_porteuse, r1.color, 
+	now(), ST_Multi(ST_Union(r2.geom)) AS geom
 FROM (
-	SELECT t1.numcom, t1.code_region, t1.nom_gal_leader, t2.code_gal, t2.code_asp, t2.code_enrd
+	SELECT t1.numcom, t1.code_region, t1.nom_gal_leader, t2.code_gal, t2.code_asp, t2.code_enrd, t2.structure_porteuse, t2.color
 	FROM ref_zonage.t_appartenance_geo_com_gal_leader t1
 	INNER JOIN met_zon.m_zon_lt_gal_leader t2
 	ON t1.code_region = t2.code_region) r1
 INNER JOIN ref_adminexpress.r_admexp_commune_fr r2
 ON r1.numcom = r2.insee_com
-GROUP BY r1.code_region, r1.nom_gal_leader, r1.code_gal, r1.code_asp, r1.code_enrd, now();
+GROUP BY r1.code_region, r1.nom_gal_leader, r1.code_gal, r1.code_asp, r1.code_enrd, r1.structure_porteuse, r1.color, now();
 
 
 
