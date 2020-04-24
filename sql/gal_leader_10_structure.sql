@@ -44,6 +44,15 @@ COMMENT ON COLUMN met_zon.m_zon_lt_gal_leader.color IS 'Couleur du fond';
 COMMENT ON COLUMN met_zon.m_zon_lt_gal_leader.date_import IS 'Date d''import de la donnée';
 COMMENT ON COLUMN met_zon.m_zon_lt_gal_leader.date_maj IS 'Date de mise à jour de la donnée';
 
+-- On ajout les données
+INSERT INTO met_zon.m_zon_lt_gal_leader (
+	code_region, code_gal, code_asp, code_enrd, nom_gal_leader, date_import
+)
+SELECT DISTINCT cod_leader_1420_maj2, code_gal, code_asp, code_enrd, nom_leader_gal_1420_maj, now()
+FROM z_maj."20200420_gal_leader_com19" where cod_leader_1420_maj2 is not NULL;
+
+-- 
+
 
 ------------------------------------------------------------------------
 -- Table: ref_zonage.t_appartenance_geo_com_gal_leader
