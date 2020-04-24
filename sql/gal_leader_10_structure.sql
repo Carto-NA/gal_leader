@@ -154,7 +154,7 @@ COMMENT ON COLUMN met_zon.m_zon_gal_leader_na_geo.geom IS 'Géometrie';
 
 -- Insertion de la données géographique des GALs LEADER
 INSERT INTO met_zon.m_zon_gal_leader_na_geo (
-	code_region, code_gal, code_asp, code_enrd, nom_gal_leader, structure_porteuse, color
+	code_region, code_gal, code_asp, code_enrd, nom_gal_leader, structure_porteuse, color,
 	date_maj, geom
 )
 SELECT r1.code_region, r1.code_gal, r1.code_asp, r1.code_enrd, r1.nom_gal_leader, r1.structure_porteuse, r1.color, 
