@@ -260,5 +260,61 @@ UPDATE ref_zonage.t_appartenance_geo_com_gal_leader SET numgal_leader='17Leader0
 WHERE numepci IN ('241600303', '200070514');
 
 
+----------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------
+-- Table: met_gen.m_gen_feader_gal_leader_typo
 
+-- DROP TABLE met_gen.m_gen_feader_gal_leader_typo;
+CREATE TABLE met_gen.m_gen_feader_gal_leader_typo 
+(
+    id serial NOT NULL, 
+    code_region character varying(80) NOT NULL,
+    typo_tourisme boolean DEFAULT false, 
+    typo_cult_patrimoine boolean DEFAULT false, 
+    typo_sante boolean DEFAULT false, 
+    typo_numerique_tic boolean DEFAULT false, 
+    typo_agri_cc_alimentaire boolean DEFAULT false, 
+    typo_enf_jeunesse boolean DEFAULT false, 
+    typo_sports_loisirs boolean DEFAULT false, 
+    typo_env_cli_trans_energetique boolean DEFAULT false, 
+    typo_lien_ville_campagne boolean DEFAULT false, 
+    typo_bois_foret boolean DEFAULT false, 
+    typo_mobilite boolean DEFAULT false, 
+    typo_dev_eco boolean DEFAULT false, 
+    typo_log_habitat boolean DEFAULT false, 
+    typo_accueil_serv_pop boolean DEFAULT false,
+    progamme  character varying(9) NOT NULL,
+    commentaire text,
+    valide_data boolean NOT NULL DEFAULT(false),
+	date_import date,
+	date_maj date,
+    CONSTRAINT m_gen_feader_gal_leader_typo_pkey PRIMARY KEY (id),
+    CONSTRAINT m_gen_feader_gal_leader_typo_puniq UNIQUE (code_region)
+);
+
+--
+GRANT ALL ON TABLE met_gen.m_gen_feader_gal_leader_typo TO "pre-sig-usr";
+GRANT ALL ON TABLE met_gen.m_gen_feader_gal_leader_typo TO "pre-sig-ro";
+
+COMMENT ON TABLE met_gen.m_gen_feader_gal_leader_typo
+    IS 'Typologie d''investissement des GAL LEADER en Nouvelle-Aquitaine';
+
+COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.id IS 'Identifiant';
+COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.code_region IS 'Code région du Groupe d''Action Locale';
+COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_tourisme IS 'Typologie : Tourisme';
+COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_cult_patrimoine IS 'Typologie : Culture patrimoine';
+COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_sante IS 'Typologie : Santé';
+COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_numerique_tic IS 'Typologie : Numérique/TIC';
+COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_agri_cc_alimentaire IS 'Typologie : Agriculture circuit court alimentaire';
+COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_enf_jeunesse IS 'Typologie : Enfance jeunesse';
+COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_sports_loisirs IS 'Typologie : Sports/loisirs';
+COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_env_cli_trans_energetique IS 'Typologie : Environnement climat transition énergétique';
+COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_lien_ville_campagne IS 'Typologie : Lien ville-campagne';
+COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_bois_foret IS 'Typologie : Bois/forêt';
+COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_mobilite IS 'Typologie : Mobilité';
+COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_dev_eco IS 'Typologie : Développement économique ressources locales ESS';
+COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_log_habitat IS 'Typologie :  Logement habitat urbanisme rural';
+COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_accueil_serv_pop IS 'Typologie : Accueil services à la population';
+COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.commentaire IS 'Commentaire';
+COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.valide_data IS 'Indique si la donnée attributaire est validée';
 
