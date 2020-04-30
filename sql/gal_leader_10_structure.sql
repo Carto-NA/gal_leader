@@ -134,6 +134,21 @@ CREATE TABLE met_zon.m_zon_gal_leader_na_geo (
 	nom_gal_leader varchar(255) NULL,
 	nom_gal_leader_2 varchar(255) NULL,
 	structure_porteuse character varying(255),
+	typo_tourisme boolean DEFAULT false, 
+    	typo_cult_patrimoine boolean DEFAULT false, 
+    	typo_sante boolean DEFAULT false, 
+    	typo_numerique_tic boolean DEFAULT false, 
+    	typo_agri_cc_alimentaire boolean DEFAULT false, 
+    	typo_enf_jeunesse boolean DEFAULT false, 
+    	typo_sports_loisirs boolean DEFAULT false, 
+    	typo_env_cli_trans_energetique boolean DEFAULT false, 
+    	typo_lien_ville_campagne boolean DEFAULT false, 
+    	typo_bois_foret boolean DEFAULT false, 
+    	typo_mobilite boolean DEFAULT false, 
+    	typo_dev_eco boolean DEFAULT false, 
+    	typo_log_habitat boolean DEFAULT false, 
+    	typo_accueil_serv_pop boolean DEFAULT false,
+    	progamme  character varying(9) NOT NULL,
 	commentaires text NULL,
 	color character varying(7),
 	date_import date NULL,
@@ -154,6 +169,20 @@ COMMENT ON COLUMN met_zon.m_zon_gal_leader_na_geo.code_enrd IS 'Code ENRD (The E
 COMMENT ON COLUMN met_zon.m_zon_gal_leader_na_geo.nom_gal_leader IS 'Nom du Groupe d''Action Locale LEADER';
 COMMENT ON COLUMN met_zon.m_zon_gal_leader_na_geo.nom_gal_leader_2 IS 'Nom court du Groupe d''Action Locale LEADER';
 COMMENT ON COLUMN met_zon.m_zon_gal_leader_na_geo.structure_porteuse IS 'Structure porteuse du GAL LEADER';
+COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_tourisme IS 'Typologie : Tourisme';
+COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_cult_patrimoine IS 'Typologie : Culture patrimoine';
+COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_sante IS 'Typologie : Santé';
+COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_numerique_tic IS 'Typologie : Numérique/TIC';
+COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_agri_cc_alimentaire IS 'Typologie : Agriculture circuit court alimentaire';
+COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_enf_jeunesse IS 'Typologie : Enfance jeunesse';
+COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_sports_loisirs IS 'Typologie : Sports/loisirs';
+COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_env_cli_trans_energetique IS 'Typologie : Environnement climat transition énergétique';
+COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_lien_ville_campagne IS 'Typologie : Lien ville-campagne';
+COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_bois_foret IS 'Typologie : Bois/forêt';
+COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_mobilite IS 'Typologie : Mobilité';
+COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_dev_eco IS 'Typologie : Développement économique ressources locales ESS';
+COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_log_habitat IS 'Typologie :  Logement habitat urbanisme rural';
+COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_accueil_serv_pop IS 'Typologie : Accueil services à la population';
 COMMENT ON COLUMN met_zon.m_zon_gal_leader_na_geo.commentaires IS 'Commentaires';
 COMMENT ON COLUMN met_zon.m_zon_gal_leader_na_geo.color IS 'Couleur du fond';
 COMMENT ON COLUMN met_zon.m_zon_gal_leader_na_geo.date_import IS 'Date d''import de la donnée';
@@ -334,3 +363,24 @@ SELECT
 	cast(logement as boolean), cast(accueil as boolean),
 	'2014/2020', null, false, now(), now()
 FROM z_maj."20200429_RECAP_52GAL_TYPOinvestiss";
+
+UPDATE met_zon.m_zon_gal_leader_na_geo 
+SET 
+	date_maj=now(), 
+	typo_tourisme=cast(tourisme as boolean),
+	typo_cult_patrimoine=cast(culture as boolean),
+	typo_sante=cast("santé" as boolean),
+	typo_numerique_tic=cast("numérique/tic" as boolean),
+	typo_agri_cc_alimentaire=cast(agriculture as boolean),
+	typo_enf_jeunesse=cast(enfance as boolean),
+	typo_sports_loisirs=cast("sports/loisirs" as boolean), 
+	typo_env_cli_trans_energetique=cast(environnement as boolean),
+	typo_lien_ville_campagne=cast(lien as boolean),
+	typo_bois_foret=cast("bois/forêt" as boolean), 
+	typo_mobilite=cast(mobilité as boolean), 
+	typo_dev_eco=cast("développement" as boolean), 
+	typo_log_habitat=cast(logement as boolean), 
+	typo_accueil_serv_pop=cast(accueil as boolean), 
+	progamme='2014/2020' 
+from z_maj."20200429_RECAP_52GAL_TYPOinvestiss" t1
+WHERE code_asp=t1.code_gal;
