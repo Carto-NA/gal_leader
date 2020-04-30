@@ -268,7 +268,7 @@ WHERE numepci IN ('241600303', '200070514');
 CREATE TABLE met_gen.m_gen_feader_gal_leader_typo 
 (
     id serial NOT NULL, 
-    code_region character varying(80) NOT NULL,
+    code_asp character varying(6) NOT NULL,
     typo_tourisme boolean DEFAULT false, 
     typo_cult_patrimoine boolean DEFAULT false, 
     typo_sante boolean DEFAULT false, 
@@ -300,7 +300,7 @@ COMMENT ON TABLE met_gen.m_gen_feader_gal_leader_typo
     IS 'Typologie d''investissement des GAL LEADER en Nouvelle-Aquitaine';
 
 COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.id IS 'Identifiant';
-COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.code_region IS 'Code région du Groupe d''Action Locale';
+COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.code_region IS 'Code ASP du Groupe d''Action Locale';
 COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_tourisme IS 'Typologie : Tourisme';
 COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_cult_patrimoine IS 'Typologie : Culture patrimoine';
 COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_sante IS 'Typologie : Santé';
