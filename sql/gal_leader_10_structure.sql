@@ -318,3 +318,19 @@ COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_accueil_serv_pop IS 
 COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.commentaire IS 'Commentaire';
 COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.valide_data IS 'Indique si la donnée attributaire est validée';
 
+-- On ajoute les données
+INSERT INTO met_gen.m_gen_feader_gal_leader_typo (
+	code_asp, 
+	typo_tourisme, typo_cult_patrimoine, typo_sante, typo_numerique_tic, typo_agri_cc_alimentaire, 
+	typo_enf_jeunesse, typo_sports_loisirs, typo_env_cli_trans_energetique, typo_lien_ville_campagne, 
+	typo_bois_foret, typo_mobilite, typo_dev_eco, typo_log_habitat, typo_accueil_serv_pop, 
+	progamme, commentaire, valide_data, date_import, date_maj
+) 
+SELECT 
+	code_gal, 
+	cast(tourisme as boolean), cast(culture as boolean), cast("santé" as boolean), cast("numérique/tic" as boolean),
+	cast(agriculture as boolean), cast(enfance as boolean), cast("sports/loisirs" as boolean), cast(environnement as boolean), 
+	cast(lien as boolean), cast("bois/forêt" as boolean), cast(mobilité as boolean), cast("développement" as boolean),  
+	cast(logement as boolean), cast(accueil as boolean),
+	'2014/2020', null, false, now(), now()
+FROM z_maj."20200429_RECAP_52GAL_TYPOinvestiss";
