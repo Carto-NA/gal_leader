@@ -1,7 +1,7 @@
-# {{gal_leader}}
+# gal_leader
 sql
 
-Application pour la gestion des données des Groupes d'Action Locale LEADER.
+'Application pour la gestion des données des Groupes d'Action Locale LEADER.'
 
 *******
 Table des matières  
@@ -11,10 +11,13 @@ Table des matières
 
 *******
 
+</br></br>
+<div id='donnees'/>  
 ## Les données
 
-<div id='donnees'/>  
 
+</br></br>
+<div id='fonctionnalites'/>
 ## Les fonctionnalités
 - Recherches :
 * par nom de GAL
@@ -24,9 +27,10 @@ Table des matières
 
 - Fiche d'information
 
-<div id='fonctionnalites'/>  
+  
 
-
+</br></br>
+<div id='utilisateurs'/>
 ## Les utilisateurs
  * groupe **"GRP_POLE_EuropeIntern_DirFE_ServPiloMesDev_ADMIN"** (administrateur des données) :
 - Isabelle GEORGES
@@ -36,7 +40,7 @@ Table des matières
 - Cécile BONNEFOY-CLAUDET
 
 
-<div id='utilisateurs'/>  
+  
 
 
 Structure des données permettant la création des zonages Groupe d'Action Locale LEADER à partir de la composition communale en Région Nouvelle-Aquitaine.
