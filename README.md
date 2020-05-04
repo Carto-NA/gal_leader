@@ -5,13 +5,17 @@ Application pour la gestion des données des Groupes d'Action Locale LEADER.
 
 *******
 Table des matières  
- 1. [Qu'est-ce que le Markdown ?](#whatismarkdown)
- 2. [Pourquoi utiliser le Markdown?](#why)
- 3. [Outils pour le Markdown](#tools)
- 4. [La syntaxe du Markdown](#syntax)
+ 1. [Les données](#donnees)
+ 2. [Les fonctionnalités](#fonctionnalites)
+ 3. [Les utilisateurs](#utilisateurs)
 
 *******
 
+## Les données
+
+<div id='donnees'/>  
+
+## Les fonctionnalités
 - Recherches :
 * par nom de GAL
 * par typologie de GAL
@@ -20,9 +24,24 @@ Table des matières
 
 - Fiche d'information
 
+<div id='fonctionnalites'/>  
+
+
+## Les utilisateurs
+ * groupe **"GRP_POLE_EuropeIntern_DirFE_ServPiloMesDev_ADMIN"** (administrateur des données) :
+- Isabelle GEORGES
+- Florence FIGUERAS
+- Julia MANAQUIN
+- Célia GASPERINI
+- Cécile BONNEFOY-CLAUDET
+
+
+<div id='utilisateurs'/>  
+
+
 Structure des données permettant la création des zonages Groupe d'Action Locale LEADER à partir de la composition communale en Région Nouvelle-Aquitaine.
 
-<div id='whatismarkdown'/>  
+
 
 ## Qu'est-ce que le Markdown ?  
 Selon Wikipedia :  
@@ -66,10 +85,4 @@ Parce que c'est :
 | Tableau 	| \| Tables   \|      Are      \|  Cool \| \|\----------\|\:\-------------\:\|------\:\| \| col 1 is\|  left-aligned \| $1600 \| | ![](http://i.imgur.com/EItt7mh.png) |
 
 
-groupe "GRP_POLE_EuropeIntern_DirFE_ServPiloMesDev_ADMIN" (administrateur des données) :
-- Isabelle GEORGES
-- Florence FIGUERAS
-- Julia MANAQUIN
-- Célia GASPERINI
-- Cécile BONNEFOY-CLAUDET
 
