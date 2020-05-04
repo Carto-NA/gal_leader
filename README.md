@@ -1,7 +1,9 @@
 # gal_leader
 sql
 
-'Application pour la gestion des données des Groupes d'Action Locale LEADER.'
+>*Application pour la gestion des données des Groupes d'Action Locale LEADER.*
+
+`TOUT SIMPLEMENT : C'EST JUSTE UN AUTRE TYPE DE FICHIER TEXTE, COMME .txt .doc ....( ICI C'EST .md :laughing:) ET IL POSSÈDE UNE SYNTAXE SPÉCIALE.`  
 
 *******
 Table des matières  
