@@ -1,4 +1,4 @@
-# gal_leader
+# {{gal_leader}}
 sql
 
 Application pour la gestion des données des Groupes d'Action Locale LEADER.
