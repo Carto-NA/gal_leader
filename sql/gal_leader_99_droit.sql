@@ -19,4 +19,4 @@ GRANT SELECT ON TABLE met_zon.m_zon_lt_gal_leader TO "pre-sig-ro";
 
 -- Tables : met_zon.m_zon_gal_leader_na_geo
 GRANT ALL ON TABLE met_zon.m_zon_gal_leader_na_geo TO "pre-sig-usr";
-GRANT SELECT ON TABLE met_zon.m_zon_gal_leader_na_geo TO "pre-sig-ro";
+GRANT ALL ON TABLE met_zon.m_zon_gal_leader_na_geo TO "pre-sig-ro";
