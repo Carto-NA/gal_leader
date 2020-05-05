@@ -148,7 +148,7 @@ CREATE TABLE met_zon.m_zon_gal_leader_na_geo (
     	typo_dev_eco boolean DEFAULT false, 
     	typo_log_habitat boolean DEFAULT false, 
     	typo_accueil_serv_pop boolean DEFAULT false,
-    	progamme  character varying(9) NOT NULL,
+    	programme  character varying(9) NOT NULL,
 	commentaires text NULL,
 	color character varying(7),
 	date_import date NULL,
@@ -169,33 +169,32 @@ COMMENT ON COLUMN met_zon.m_zon_gal_leader_na_geo.code_enrd IS 'Code ENRD (The E
 COMMENT ON COLUMN met_zon.m_zon_gal_leader_na_geo.nom_gal_leader IS 'Nom du Groupe d''Action Locale LEADER';
 COMMENT ON COLUMN met_zon.m_zon_gal_leader_na_geo.nom_gal_leader_2 IS 'Nom court du Groupe d''Action Locale LEADER';
 COMMENT ON COLUMN met_zon.m_zon_gal_leader_na_geo.structure_porteuse IS 'Structure porteuse du GAL LEADER';
-COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_tourisme IS 'Typologie : Tourisme';
-COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_cult_patrimoine IS 'Typologie : Culture patrimoine';
-COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_sante IS 'Typologie : Santé';
-COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_numerique_tic IS 'Typologie : Numérique/TIC';
-COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_agri_cc_alimentaire IS 'Typologie : Agriculture circuit court alimentaire';
-COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_enf_jeunesse IS 'Typologie : Enfance jeunesse';
-COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_sports_loisirs IS 'Typologie : Sports/loisirs';
-COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_env_cli_trans_energetique IS 'Typologie : Environnement climat transition énergétique';
-COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_lien_ville_campagne IS 'Typologie : Lien ville-campagne';
-COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_bois_foret IS 'Typologie : Bois/forêt';
-COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_mobilite IS 'Typologie : Mobilité';
-COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_dev_eco IS 'Typologie : Développement économique ressources locales ESS';
-COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_log_habitat IS 'Typologie :  Logement habitat urbanisme rural';
-COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_accueil_serv_pop IS 'Typologie : Accueil services à la population';
+COMMENT ON COLUMN met_zon.m_zon_gal_leader_na_geo.typo_tourisme IS 'Typologie : Tourisme';
+COMMENT ON COLUMN met_zon.m_zon_gal_leader_na_geo.typo_cult_patrimoine IS 'Typologie : Culture patrimoine';
+COMMENT ON COLUMN met_zon.m_zon_gal_leader_na_geo.typo_sante IS 'Typologie : Santé';
+COMMENT ON COLUMN met_zon.m_zon_gal_leader_na_geo.typo_numerique_tic IS 'Typologie : Numérique/TIC';
+COMMENT ON COLUMN met_zon.m_zon_gal_leader_na_geo.typo_agri_cc_alimentaire IS 'Typologie : Agriculture circuit court alimentaire';
+COMMENT ON COLUMN met_zon.m_zon_gal_leader_na_geo.typo_enf_jeunesse IS 'Typologie : Enfance jeunesse';
+COMMENT ON COLUMN met_zon.m_zon_gal_leader_na_geo.typo_sports_loisirs IS 'Typologie : Sports/loisirs';
+COMMENT ON COLUMN met_zon.m_zon_gal_leader_na_geo.typo_env_cli_trans_energetique IS 'Typologie : Environnement climat transition énergétique';
+COMMENT ON COLUMN met_zon.m_zon_gal_leader_na_geo.typo_lien_ville_campagne IS 'Typologie : Lien ville-campagne';
+COMMENT ON COLUMN met_zon.m_zon_gal_leader_na_geo.typo_bois_foret IS 'Typologie : Bois/forêt';
+COMMENT ON COLUMN met_zon.m_zon_gal_leader_na_geo.typo_mobilite IS 'Typologie : Mobilité';
+COMMENT ON COLUMN met_zon.m_zon_gal_leader_na_geo.typo_dev_eco IS 'Typologie : Développement économique ressources locales ESS';
+COMMENT ON COLUMN met_zon.m_zon_gal_leader_na_geo.typo_log_habitat IS 'Typologie :  Logement habitat urbanisme rural';
+COMMENT ON COLUMN met_zon.m_zon_gal_leader_na_geo.typo_accueil_serv_pop IS 'Typologie : Accueil services à la population';
 COMMENT ON COLUMN met_zon.m_zon_gal_leader_na_geo.commentaires IS 'Commentaires';
 COMMENT ON COLUMN met_zon.m_zon_gal_leader_na_geo.color IS 'Couleur du fond';
 COMMENT ON COLUMN met_zon.m_zon_gal_leader_na_geo.date_import IS 'Date d''import de la donnée';
 COMMENT ON COLUMN met_zon.m_zon_gal_leader_na_geo.date_maj IS 'Date de mise à jour de la donnée';
 COMMENT ON COLUMN met_zon.m_zon_gal_leader_na_geo.geom IS 'Géometrie';
 
-
 -- Insertion de la données géographique des GALs LEADER
 INSERT INTO met_zon.m_zon_gal_leader_na_geo (
 	code_region, code_gal, code_asp, code_enrd, nom_gal_leader, structure_porteuse, color,
 	date_maj, geom
 )
-SELECT r1.code_region, r1.code_gal, r1.code_asp, r1.code_enrd, r1.nom_gal_leader, r1.structure_porteuse, r1.color, 
+SELECT r1.code_region, r1.code_gal, r1.code_asp, r1.code_enrd, r1.nom_gal_leader, r1.structure_porteuse, '2014/2020' AS programme, r1.color, 
 	now(), ST_Multi(ST_Union(r2.geom)) AS geom
 FROM (
 	SELECT t1.numcom, t1.code_region, t1.nom_gal_leader, t2.code_gal, t2.code_asp, t2.code_enrd, t2.structure_porteuse, t2.color
@@ -381,6 +380,6 @@ SET
 	typo_dev_eco=cast("développement" as boolean), 
 	typo_log_habitat=cast(logement as boolean), 
 	typo_accueil_serv_pop=cast(accueil as boolean), 
-	progamme='2014/2020' 
+	programme='2014/2020' 
 from z_maj."20200429_RECAP_52GAL_TYPOinvestiss" t1
 WHERE code_asp=t1.code_gal;
