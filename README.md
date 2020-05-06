@@ -10,6 +10,7 @@ Table des matières
  1. [Les données](#donnees)
  2. [Les fonctionnalités](#fonctionnalites)
  3. [Les utilisateurs](#utilisateurs)
+ 4. [Application](#application)
 
 *******
 
@@ -42,8 +43,20 @@ Table des matières
 - Cécile BONNEFOY-CLAUDET
 
 
-  
+</br></br>
+<div id='application'/>
+## Application
 
+**Description
+
+Un groupe d'action locale ou GAL est un ensemble de partenaires socio-économiques privés et publics installés dans des territoires ruraux et chargés de la mise en place d’une stratégie de développement organisée en accord avec le programme européen Leader. Les fonds Leader sont distribués au niveau du GAL. Le GAL regroupe des élus locaux et des représentants d'établissements publics comme des entreprises, des chambres consulaires ou des associations.
+
+**Mots clés
+GAL; LEADER;
+
+**Fonctionnalités
+
+**Fonds de 
 
 Structure des données permettant la création des zonages Groupe d'Action Locale LEADER à partir de la composition communale en Région Nouvelle-Aquitaine.
 
