@@ -205,6 +205,27 @@ INNER JOIN ref_adminexpress.r_admexp_commune_fr r2
 ON r1.numcom = r2.insee_com
 GROUP BY r1.code_region, r1.nom_gal_leader, r1.code_gal, r1.code_asp, r1.code_enrd, r1.structure_porteuse, r1.color, now();
 
+-- Mise à jour de la typologie des GAL
+UPDATE met_zon.m_zon_gal_leader_na_geo 
+SET 
+	date_maj=now(), 
+	typo_tourisme=cast(tourisme as boolean),
+	typo_cult_patrimoine=cast(culture as boolean),
+	typo_sante=cast("santé" as boolean),
+	typo_numerique_tic=cast("numérique/tic" as boolean),
+	typo_agri_cc_alimentaire=cast(agriculture as boolean),
+	typo_enf_jeunesse=cast(enfance as boolean),
+	typo_sports_loisirs=cast("sports/loisirs" as boolean), 
+	typo_env_cli_trans_energetique=cast(environnement as boolean),
+	typo_lien_ville_campagne=cast(lien as boolean),
+	typo_bois_foret=cast("bois/forêt" as boolean), 
+	typo_mobilite=cast(mobilité as boolean), 
+	typo_dev_eco=cast("développement" as boolean), 
+	typo_log_habitat=cast(logement as boolean), 
+	typo_accueil_serv_pop=cast(accueil as boolean), 
+	programme='2014/2020' 
+from z_maj."20200429_RECAP_52GAL_TYPOinvestiss" t1
+WHERE code_asp=t1.code_gal;
 
 
 
@@ -288,98 +309,3 @@ UPDATE ref_zonage.t_appartenance_geo_com_gal_leader SET numgal_leader='17Leader0
 WHERE numepci IN ('241600303', '200070514');
 
 
-----------------------------------------------------------------------------------------
-----------------------------------------------------------------------------------------
--- Table: met_gen.m_gen_feader_gal_leader_typo
-
--- DROP TABLE met_gen.m_gen_feader_gal_leader_typo;
-CREATE TABLE met_gen.m_gen_feader_gal_leader_typo 
-(
-    id serial NOT NULL, 
-    code_asp character varying(6) NOT NULL,
-    typo_tourisme boolean DEFAULT false, 
-    typo_cult_patrimoine boolean DEFAULT false, 
-    typo_sante boolean DEFAULT false, 
-    typo_numerique_tic boolean DEFAULT false, 
-    typo_agri_cc_alimentaire boolean DEFAULT false, 
-    typo_enf_jeunesse boolean DEFAULT false, 
-    typo_sports_loisirs boolean DEFAULT false, 
-    typo_env_cli_trans_energetique boolean DEFAULT false, 
-    typo_lien_ville_campagne boolean DEFAULT false, 
-    typo_bois_foret boolean DEFAULT false, 
-    typo_mobilite boolean DEFAULT false, 
-    typo_dev_eco boolean DEFAULT false, 
-    typo_log_habitat boolean DEFAULT false, 
-    typo_accueil_serv_pop boolean DEFAULT false,
-    progamme  character varying(9) NOT NULL,
-    commentaire text,
-    valide_data boolean NOT NULL DEFAULT(false),
-	date_import date,
-	date_maj date,
-    CONSTRAINT m_gen_feader_gal_leader_typo_pkey PRIMARY KEY (id),
-    CONSTRAINT m_gen_feader_gal_leader_typo_puniq UNIQUE (code_region)
-);
-
---
-GRANT ALL ON TABLE met_gen.m_gen_feader_gal_leader_typo TO "pre-sig-usr";
-GRANT ALL ON TABLE met_gen.m_gen_feader_gal_leader_typo TO "pre-sig-ro";
-
-COMMENT ON TABLE met_gen.m_gen_feader_gal_leader_typo
-    IS 'Typologie d''investissement des GAL LEADER en Nouvelle-Aquitaine';
-
-COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.id IS 'Identifiant';
-COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.code_region IS 'Code ASP du Groupe d''Action Locale';
-COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_tourisme IS 'Typologie : Tourisme';
-COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_cult_patrimoine IS 'Typologie : Culture patrimoine';
-COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_sante IS 'Typologie : Santé';
-COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_numerique_tic IS 'Typologie : Numérique/TIC';
-COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_agri_cc_alimentaire IS 'Typologie : Agriculture circuit court alimentaire';
-COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_enf_jeunesse IS 'Typologie : Enfance jeunesse';
-COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_sports_loisirs IS 'Typologie : Sports/loisirs';
-COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_env_cli_trans_energetique IS 'Typologie : Environnement climat transition énergétique';
-COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_lien_ville_campagne IS 'Typologie : Lien ville-campagne';
-COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_bois_foret IS 'Typologie : Bois/forêt';
-COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_mobilite IS 'Typologie : Mobilité';
-COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_dev_eco IS 'Typologie : Développement économique ressources locales ESS';
-COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_log_habitat IS 'Typologie :  Logement habitat urbanisme rural';
-COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.typo_accueil_serv_pop IS 'Typologie : Accueil services à la population';
-COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.commentaire IS 'Commentaire';
-COMMENT ON COLUMN met_gen.m_gen_feader_gal_leader_typo.valide_data IS 'Indique si la donnée attributaire est validée';
-
--- On ajoute les données
-INSERT INTO met_gen.m_gen_feader_gal_leader_typo (
-	code_asp, 
-	typo_tourisme, typo_cult_patrimoine, typo_sante, typo_numerique_tic, typo_agri_cc_alimentaire, 
-	typo_enf_jeunesse, typo_sports_loisirs, typo_env_cli_trans_energetique, typo_lien_ville_campagne, 
-	typo_bois_foret, typo_mobilite, typo_dev_eco, typo_log_habitat, typo_accueil_serv_pop, 
-	progamme, commentaire, valide_data, date_import, date_maj
-) 
-SELECT 
-	code_gal, 
-	cast(tourisme as boolean), cast(culture as boolean), cast("santé" as boolean), cast("numérique/tic" as boolean),
-	cast(agriculture as boolean), cast(enfance as boolean), cast("sports/loisirs" as boolean), cast(environnement as boolean), 
-	cast(lien as boolean), cast("bois/forêt" as boolean), cast(mobilité as boolean), cast("développement" as boolean),  
-	cast(logement as boolean), cast(accueil as boolean),
-	'2014/2020', null, false, now(), now()
-FROM z_maj."20200429_RECAP_52GAL_TYPOinvestiss";
-
-UPDATE met_zon.m_zon_gal_leader_na_geo 
-SET 
-	date_maj=now(), 
-	typo_tourisme=cast(tourisme as boolean),
-	typo_cult_patrimoine=cast(culture as boolean),
-	typo_sante=cast("santé" as boolean),
-	typo_numerique_tic=cast("numérique/tic" as boolean),
-	typo_agri_cc_alimentaire=cast(agriculture as boolean),
-	typo_enf_jeunesse=cast(enfance as boolean),
-	typo_sports_loisirs=cast("sports/loisirs" as boolean), 
-	typo_env_cli_trans_energetique=cast(environnement as boolean),
-	typo_lien_ville_campagne=cast(lien as boolean),
-	typo_bois_foret=cast("bois/forêt" as boolean), 
-	typo_mobilite=cast(mobilité as boolean), 
-	typo_dev_eco=cast("développement" as boolean), 
-	typo_log_habitat=cast(logement as boolean), 
-	typo_accueil_serv_pop=cast(accueil as boolean), 
-	programme='2014/2020' 
-from z_maj."20200429_RECAP_52GAL_TYPOinvestiss" t1
-WHERE code_asp=t1.code_gal;
