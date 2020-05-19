@@ -41,6 +41,7 @@ Table des matières
 - Julia MANAQUIN
 - Célia GASPERINI
 - Cécile BONNEFOY-CLAUDET
+- Cécile RABER
 
 
 </br></br>
